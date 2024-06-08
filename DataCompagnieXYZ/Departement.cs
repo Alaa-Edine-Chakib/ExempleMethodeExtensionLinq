@@ -11,5 +11,6 @@ namespace DataCompagnieXYZ
         public int Id { get; set; }
         public string NomCourt { get; set; }
         public string NomLong { get; set; }
+        public IEnumerable<Employe> Employes { get; set; }
     }
 }

@@ -49,14 +49,14 @@ namespace DataCompagnieXYZ
                 Nom = "Stevens",
                 SalaireAnnuel = 30000.2m,
                 estManager = false,
-                DepartementId = 3
+                DepartementId = 2
             };
             employees.Add(employee);
 
             return employees;
         }
 
-        public static List<Departement> GetDepartements()
+        public static List<Departement> GetDepartements(IEnumerable<Employe> employes)
         {
             List<Departement> departements = new List<Departement>();
 
@@ -64,21 +64,25 @@ namespace DataCompagnieXYZ
             {
                 Id = 1,
                 NomCourt = "HR",
-                NomLong = "Human Resources"
+                NomLong = "Human Resources",
+                Employes = employes.Where(e => e.DepartementId == 1)
             };
             departements.Add(department);
             department = new Departement
             {
                 Id = 2,
                 NomCourt = "FN",
-                NomLong = "Finance"
+                NomLong = "Finance",
+                Employes = employes.Where(e => e.DepartementId == 2)
+
             };
             departements.Add(department);
             department = new Departement
             {
                 Id = 3,
                 NomCourt = "TE",
-                NomLong = "Technology"
+                NomLong = "Technology",
+                Employes = employes.Where(e => e.DepartementId == 3)
             };
             departements.Add(department);
 
