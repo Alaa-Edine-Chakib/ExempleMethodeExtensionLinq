@@ -68,43 +68,57 @@ namespace XYZCompagnieApplication
             //});
 
 
-            ///Execution Differe , donc malgre l'ajout de l'employe après la requete, il est pris en compte
-            //var res6 = from emp in employesListe.GetEmployesLesMieuxPaye()
-            //              select new
-            //              {
-            //                  NomComplet = emp.Prenom + " " + emp.Nom,
-            //                  SalaireAnnuelEmp = emp.SalaireAnnuel
-            //              };
+            // Execution Differe , donc malgre l'ajout de l'employe après la requete, il est pris en compte
+            var res6 = from emp in employesListe.GetEmployesLesMieuxPaye()
+                       select new
+                       {
+                           NomComplet = emp.Prenom + " " + emp.Nom,
+                           SalaireAnnuelEmp = emp.SalaireAnnuel
+                       };
 
-            //employesListe.Add(new Employe
-            //{
-            //    Id = 5,
-            //    Prenom = "Johanne",
-            //    Nom = "Guillemont",
-            //    SalaireAnnuel = 100000.20m,
-            //    estManager = false,
-            //    DepartementId = 3
-            //});
+            employesListe.Add(new Employe
+            {
+                Id = 5,
+                Prenom = "Johanne2",
+                Nom = "Guillemont",
+                SalaireAnnuel = 100000.20m,
+                estManager = false,
+                DepartementId = 3
+            });
 
-     
+            employesListe.Add(new Employe
+            {
+                Id = 5,
+                Prenom = "Johanne",
+                Nom = "Guillemont",
+                SalaireAnnuel = 100000.20m,
+                estManager = false,
+                DepartementId = 3
+            });
+
+            foreach (var item in res6)
+            {
+                Console.WriteLine($"Prenom: {item.NomComplet}");
+
+                Console.WriteLine($"Salaire Annuel: {item.SalaireAnnuelEmp}");
+
+                Console.WriteLine();
+            }
+
+            
+
+
+
 
             //Execution Immediat , donc malgre l'ajout de l'employe après la requete, il n'est pas pris en compte
-            //var res7 = (from emp in employesListe.GetEmployesLesMieuxPaye()
-            //               select new
-            //               {
-            //                   NomComplet = emp.Prenom + " " + emp.Nom,
-            //                   SalaireAnnuelEmp = emp.SalaireAnnuel
-            //               }).ToList();
+            var res7 = (from emp in employesListe.GetEmployesLesMieuxPaye()
+                        select new
+                        {
+                            NomComplet = emp.Prenom + " " + emp.Nom,
+                            SalaireAnnuelEmp = emp.SalaireAnnuel
+                        }).ToList();
 
-            //employesListe.Add(new Employe
-            //{
-            //    Id = 5,
-            //    Prenom = "Johanne",
-            //    Nom = "Guillemont",
-            //    SalaireAnnuel = 100000.20m,
-            //    estManager = false,
-            //    DepartementId = 3
-            //});
+         
 
 
             //On utilise la methode Join pour joindre les employes et les departements synatxe Method
@@ -138,15 +152,7 @@ namespace XYZCompagnieApplication
             //    Console.WriteLine();
             //}
 
-            //foreach (var item in res3)
-            //{
-            //    Console.WriteLine($"Prenom: {item.PrenomEmp}");
-            //    Console.WriteLine($"Nom: {item.NomEmp}");
-            //    Console.WriteLine($"Salaire Annuel: {item.SalaireAnnuelEmp}");
-            //    Console.WriteLine($"Est Manager: {item.EmpEstManager}");
-            //    Console.WriteLine($"Departement Nom {item.DepNom}");
-            //    Console.WriteLine();
-            //}
+      
 
             //foreach (var item in res5)
             //{
@@ -693,25 +699,25 @@ namespace XYZCompagnieApplication
             ////Let clause
             /// Va permettre de stocker des valeurs intermediaires dans une requete
 
-            //var res23 = from emp in employesListe
-            //            let initials = emp.Prenom.Substring(0, 1).ToUpper() + emp.Nom.Substring(0, 1).ToUpper()
-            //            let salaireAnuelPlusBonus = (!emp.estManager) ? emp.SalaireAnnuel + (emp.SalaireAnnuel * 0.02m) : emp.SalaireAnnuel + (emp.SalaireAnnuel * 0.04m)
-            //            where initials == "BJ" && salaireAnuelPlusBonus >= 50000
-            //            select new
-            //            {
-            //                Initiales = initials,
-            //                NomComplet = emp.Prenom + " " + emp.Nom,
-            //                SalaireAnnuelEtBonus = salaireAnuelPlusBonus
+            var res23 = from emp in employesListe
+                        let initials = emp.Prenom.Substring(0, 1).ToUpper() + emp.Nom.Substring(0, 1).ToUpper()
+                        let salaireAnuelPlusBonus = (!emp.estManager) ? emp.SalaireAnnuel + (emp.SalaireAnnuel * 0.02m) : emp.SalaireAnnuel + (emp.SalaireAnnuel * 0.04m)
+                        where initials == "BJ" && salaireAnuelPlusBonus >= 50000
+                        select new
+                        {
+                            Initiales = initials,
+                            NomComplet = emp.Prenom + " " + emp.Nom,
+                            SalaireAnnuelEtBonus = salaireAnuelPlusBonus
 
-            //            };
+                        };
 
-            //foreach (var item in res23)
-            //{
-            //    Console.WriteLine($"Initiales: {item.Initiales}");
-            //    Console.WriteLine($"Nom Complet: {item.NomComplet}");
-            //    Console.WriteLine($"Salaire Annuel et Bonus: {item.SalaireAnnuelEtBonus}");
-            //    Console.WriteLine();
-            //}
+            foreach (var item in res23)
+            {
+                Console.WriteLine($"Initiales: {item.Initiales}");
+                Console.WriteLine($"Nom CompleAWt: {item.NomComplet}");
+                Console.WriteLine($"Salaire Annuel et Bonus: {item.SalaireAnnuelEtBonus}");
+                Console.WriteLine();
+            }
 
             ////Clause into
             ///
@@ -719,21 +725,21 @@ namespace XYZCompagnieApplication
             //On va filtrer les employes ayant un salaire annuel superieur a 50000 et avec le mot clé into on va stocker les resultats dans une variable intermediaire
             //On va ensuite filtrer les employes ayant le statut de manager sur la variable intermediaire et ensuite on selectionne la variable intermediaire
 
-            //var res24 = from emp in employesListe
-            //            where emp.SalaireAnnuel > 50000
-            //            select emp into empSalairePlusHaut
-            //            where empSalairePlusHaut.estManager
-            //            select empSalairePlusHaut;
+            var res24 = from emp in employesListe
+                        where emp.SalaireAnnuel > 50000 
+                        select emp into empSalairePlusHaut
+                        where empSalairePlusHaut.estManager
+                        select empSalairePlusHaut;
 
-            //foreach (var item in res24)
-            //{
-            //    Console.WriteLine($"Prenom: {item.Prenom}");
-            //    Console.WriteLine($"Nom: {item.Nom}");
-            //    Console.WriteLine($"Salaire Annuel: {item.SalaireAnnuel}");
-            //    Console.WriteLine($"Est Manager: {item.estManager}");
-            //    Console.WriteLine($"Departement Id: {item.DepartementId}");
-            //    Console.WriteLine();
-            //}
+            foreach (var item in res24)
+            {
+                Console.WriteLine($"Prenom: {item.Prenom}");
+                Console.WriteLine($"Nom: {item.Nom}");
+                Console.WriteLine($"Salaire Annuel: {item.SalaireAnnuel}");
+                Console.WriteLine($"Est Manager: {item.estManager}");
+                Console.WriteLine($"Departement Id: {item.DepartementId}");
+                Console.WriteLine();
+            }
 
             ////Operateur de Projection - Select, SelectMany
             //Select
@@ -748,9 +754,9 @@ namespace XYZCompagnieApplication
             //Va permettre de selectionner les elements d'une collection de collection
             //Ici on selectionne tout les employes faisant partie du departement 2
             //Le selectMany va permettre de retourner une seule liste d'employes au lieu d'une liste d'employe dans une liste de departement
-            var res26 = departementsListe.SelectMany(d => d.Employes);
-            foreach (var item in res26)
-                Console.WriteLine($"Prenom: {item.Prenom} Nom: {item.Nom} Salaire Annuel: {item.SalaireAnnuel} Est Manager: {item.estManager} Departement Id: {item.DepartementId}");
+            //var res26 = departementsListe.SelectMany(d => d.Employes);
+            //foreach (var item in res26)
+            //    Console.WriteLine($"Prenom: {item.Prenom} Nom: {item.Nom} Salaire Annuel: {item.SalaireAnnuel} Est Manager: {item.estManager} Departement Id: {item.DepartementId}");
 
 
 
